@@ -1,143 +1,134 @@
-<script>
-  import { scrollReveal } from '$lib/utils/animate.js';
-  import StarField        from './StarField.svelte';
+<script lang="ts">
+  import { scrollReveal, staggerReveal } from '$lib/utils/animate.js';
 
   const stats = [
-    { label: 'Type',       value: 'Dark'       },
-    { label: 'Gen',        value: 'II'          },
-    { label: 'Evolution',  value: 'Moonlight'   },
-    { label: 'Base HP',    value: '95'          },
-    { label: 'Base Def',   value: '110'         },
-    { label: 'Sp. Def',    value: '130'         },
+    { label: 'Type',   value: 'Dark'      },
+    { label: 'Gen',    value: 'II'        },
+    { label: 'Evolve', value: 'Moonlight' },
+    { label: 'HP',     value: '95'        },
+    { label: 'DEF',    value: '110'       },
+    { label: 'SP.DEF', value: '130'       }
   ];
 </script>
 
-<section id="showcase" class="relative overflow-hidden py-0" style="background:#060a16;">
+<section id="mascot" class="relative py-28 px-6 overflow-hidden">
 
-  <!-- ── Full-bleed rings GIF background ───────────────────────── -->
-  <div class="absolute inset-0 z-0" aria-hidden="true">
+  <!-- comet-bg.gif — mix-blend-mode: screen makes black transparent -->
+  <div class="absolute inset-0 z-0 pointer-events-none select-none hidden md:block" aria-hidden="true">
     <img
-      src="/assets/mascot/umbreon-rings.gif"
+      src="/assets/comet-bg.gif"
       alt=""
-      class="w-full h-full object-cover opacity-[0.28]"
-      style="mix-blend-mode: screen;"
+      class="w-full h-full object-cover"
+      style="opacity: 0.22; mix-blend-mode: screen; filter: hue-rotate(10deg);"
+      loading="lazy"
     />
   </div>
 
-  <!-- ── Eye GIF — left side, very subtle ──────────────────────── -->
-  <div class="absolute left-0 top-0 bottom-0 w-[40rem] z-0 hidden md:block" aria-hidden="true">
-    <img
-      src="/assets/mascot/umbreon-eye.gif"
-      alt=""
-      class="w-full h-full object-cover opacity-[0.12]"
-      style="mix-blend-mode: screen; object-position: right center;"
-    />
-  </div>
-
-  <!-- ── Dark overlay for readability ─────────────────────────── -->
-  <div class="absolute inset-0 z-[1]"
-    style="background: linear-gradient(to right, rgba(6,10,22,0.88) 0%, rgba(6,10,22,0.5) 50%, rgba(6,10,22,0.3) 100%);"
+  <!-- Ambient glow -->
+  <div
+    class="absolute inset-0 z-0 pointer-events-none"
+    aria-hidden="true"
+    style="background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(124,58,237,0.1) 0%, transparent 70%);"
   ></div>
 
-  <!-- Stars -->
-  <StarField count={45} goldRatio={0.12} className="z-[2]" />
+  <div class="relative z-10 max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
 
-  <!-- Gold nebula top-center -->
-  <div class="absolute top-0 inset-x-0 h-1/2 z-[2] pointer-events-none"
-    style="background: radial-gradient(ellipse 50% 40% at 50% 0%, rgba(247,216,75,0.06) 0%, transparent 60%);"
-  ></div>
+      <!-- SVG Umbreon -->
+      <div use:scrollReveal class="flex justify-center order-2 md:order-1">
+        <div
+          class="relative w-72 h-72 flex items-center justify-center rounded-full animate-float"
+          style="
+            background: radial-gradient(circle at 50% 55%, rgba(124,58,237,0.25) 0%, rgba(7,3,26,0.9) 65%);
+            border: 1px solid rgba(139,92,246,0.3);
+            box-shadow:
+              0 0 60px  rgba(124,58,237,0.25),
+              0 0 120px rgba(124,58,237,0.1),
+              inset 0 0 40px rgba(7,3,26,0.8);
+          "
+        >
+          <svg viewBox="0 0 100 100" class="w-48 h-48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Body -->
+            <ellipse cx="50" cy="63" rx="27" ry="20" fill="#0e0720"/>
+            <circle  cx="50" cy="38" r="20"           fill="#0e0720"/>
+            <!-- Rings -->
+            <ellipse cx="50" cy="57" rx="14" ry="3.5" fill="none" stroke="#fbbf24" stroke-width="2.2" opacity="0.9"/>
+            <ellipse cx="50" cy="68" rx="10" ry="2"   fill="none" stroke="#fbbf24" stroke-width="1.6" opacity="0.7"/>
+            <!-- Ears -->
+            <polygon points="33,23 26,5 38,18" fill="#0e0720"/>
+            <polygon points="67,23 74,5 62,18" fill="#0e0720"/>
+            <circle cx="33" cy="17" r="2.8" fill="#fbbf24" opacity="0.9"/>
+            <circle cx="67" cy="17" r="2.8" fill="#fbbf24" opacity="0.9"/>
+            <!-- Eyes -->
+            <circle cx="42" cy="36" r="5"   fill="#cc1133"/>
+            <circle cx="58" cy="36" r="5"   fill="#cc1133"/>
+            <circle cx="42" cy="36" r="2.2" fill="#0e0720"/>
+            <circle cx="58" cy="36" r="2.2" fill="#0e0720"/>
+            <!-- Forehead dot -->
+            <circle cx="50" cy="26" r="4" fill="#fbbf24" opacity="0.85"/>
+            <!-- Legs -->
+            <rect x="33" y="79" width="10" height="14" rx="5" fill="#0e0720"/>
+            <rect x="57" y="79" width="10" height="14" rx="5" fill="#0e0720"/>
+            <!-- Tail -->
+            <path d="M74 65 Q96 52 90 70 Q84 84 74 75" fill="#0e0720" stroke="#fbbf24" stroke-width="1.4" opacity="0.7"/>
+          </svg>
+          <!-- Outer glow ring -->
+          <div
+            class="absolute inset-0 rounded-full pointer-events-none animate-glow-pulse"
+            style="border: 1px solid rgba(139,92,246,0.25);"
+          ></div>
+        </div>
+      </div>
 
-  <!-- ── Content ──────────────────────────────────────────────── -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+      <!-- Text -->
+      <div class="order-1 md:order-2">
 
-      <!-- LEFT: Info ─────────────────────────────────────────────── -->
-      <div class="flex flex-col gap-8" use:scrollReveal>
-
-        <div>
-          <p class="section-label mb-3">Team Mascot</p>
-          <h2 class="font-display text-xs sm:text-sm md:text-base leading-loose">
-            <span class="text-white">Umbreon —</span><br/>
-            <span style="color:#f7d84b; text-shadow: 0 0 20px rgba(247,216,75,0.4);">The Moonlight</span><br/>
-            <span class="text-white">Pokémon</span>
+        <div use:scrollReveal>
+          <p class="section-label">Team Mascot</p>
+          <h2 class="text-section font-display font-black text-white mb-4">
+            Umbreon —<br />
+            <span class="gradient-text">The Moonlight</span><br />
+            Pokémon
           </h2>
         </div>
 
-        <p class="text-white/50 text-sm sm:text-base leading-relaxed max-w-lg font-light">
-          When the moon rises, Umbreon's golden rings begin to glow — a beacon
-          in the darkness. Patient, loyal, and nearly indestructible in battle,
-          Umbreon is the perfect symbol for what we stand for as a guild.
-        </p>
+        <div use:scrollReveal={{ delay: 80 }}>
+          <p class="text-slate-300 text-base leading-relaxed mb-2">
+            Patient. Loyal. Built for the long game.
+          </p>
+          <p class="text-slate-500 text-sm leading-relaxed mb-8">
+            That's the energy we bring to every hunt and battle.
+          </p>
+        </div>
 
-        <!-- Pokédex-style stat grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {#each stats as s, i}
+        <!-- Stat grid -->
+        <div
+          use:staggerReveal={{ delay: 140, step: 50 }}
+          class="grid grid-cols-3 gap-3"
+        >
+          {#each stats as stat}
             <div
-              class="rounded-xl border border-yellow-400/15 bg-yellow-400/[0.03] px-4 py-3"
-              use:scrollReveal={{ delay: 80 + i * 60 }}
+              class="card-glass px-3 py-3 text-center"
+              style="border-color: rgba(251,191,36,0.12);"
             >
-              <span class="block font-mono text-yellow-400/50 text-[9px] uppercase tracking-widest mb-1">{s.label}</span>
-              <span class="block font-display text-white text-[10px]">{s.value}</span>
+              <p class="text-slate-600 uppercase tracking-widest mb-1" style="font-size:0.6rem;">{stat.label}</p>
+              <p class="font-display font-bold text-yellow-400 text-sm">{stat.value}</p>
             </div>
           {/each}
         </div>
 
-        <!-- Flavour quote -->
-        <blockquote class="border-l-2 border-yellow-400/40 pl-4 text-white/38 text-xs italic leading-relaxed">
-          "When darkness falls, the rings on Umbreon's body begin to glow,
-          striking fear into the hearts of anyone nearby."
-          <footer class="mt-2 font-mono text-[9px] text-yellow-400/40 not-italic">— Pokédex, Gold Version</footer>
-        </blockquote>
-
-        <a href="#values" class="btn-outline w-fit">Our Values ►</a>
-      </div>
-
-      <!-- RIGHT: Cosmic image (re-used, different treatment) ─────── -->
-      <div
-        class="relative flex justify-center lg:justify-end"
-        use:scrollReveal={{ delay: 200, direction: 'left' }}
-      >
-        <!-- Halo ring glow -->
-        <div class="absolute -inset-8 rounded-full pointer-events-none"
-          style="background: radial-gradient(ellipse, rgba(247,216,75,0.1) 0%, transparent 60%);"></div>
-
-        <div class="relative w-full max-w-[340px] lg:max-w-[400px]">
-          <!-- Subtle border -->
-          <div class="absolute -inset-[1px] rounded-[2rem] opacity-50"
-            style="background: linear-gradient(160deg, rgba(247,216,75,0.4), rgba(139,92,246,0.15), transparent);"
-          ></div>
-
-          <div class="relative rounded-[2rem] overflow-hidden"
-            style="box-shadow: 0 0 80px rgba(247,216,75,0.12), 0 0 160px rgba(80,30,160,0.15);"
+        <!-- Dex quote -->
+        <div use:scrollReveal={{ delay: 300 }} class="mt-8">
+          <blockquote
+            class="text-sm text-slate-600 italic border-l-2 pl-4 leading-relaxed"
+            style="border-color: rgba(251,191,36,0.3);"
           >
-            <img
-              src="/assets/sprites/mew-sprite.png"
-              alt="Mew sprite"
-              class="w-full h-full"
-              style="min-height:460px; object-fit: contain; object-position: center center;"
-              loading="lazy"
-            />
-            <!-- Bottom fade -->
-            <div class="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
-              style="background: linear-gradient(to top, rgba(6,10,22,0.7), transparent);"
-            ></div>
-          </div>
-
-          <!-- Floating ring sprites on the sides -->
-          <div
-            class="absolute -right-6 top-[20%] w-14 h-14 hidden lg:block"
-            aria-hidden="true"
-          >
-            <img
-              src="/assets/sprites/umbreon-sprite.png"
-              alt=""
-              class="pixel w-full h-full object-contain animate-float"
-              style="image-rendering:pixelated; mix-blend-mode:screen; filter:drop-shadow(0 0 8px rgba(247,216,75,0.8)); animation-delay:1s;"
-            />
-          </div>
+            "When darkness falls, the rings on Umbreon's body begin to glow."
+            <cite class="not-italic text-slate-700 text-xs mt-1 block">— Pokédex, Gold Version</cite>
+          </blockquote>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 </section>

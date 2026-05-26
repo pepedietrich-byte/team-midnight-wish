@@ -1,121 +1,75 @@
-<script>
-  import StarField from './StarField.svelte';
-
-  const year = new Date().getFullYear();
-
-  const navLinks = [
-    { label: 'About',   href: '#about'    },
-    { label: 'Events',  href: '#events'   },
-    { label: 'Mascot',  href: '#showcase' },
-    { label: 'Values',  href: '#values'   },
-    { label: 'PvP',     href: '#pvp'      },
-  ];
-
-  const socials = [
-    { label: 'Discord', href: 'https://discord.gg/', icon: '💬' },
-    { label: 'Twitter', href: 'https://twitter.com/', icon: '🐦' },
-    { label: 'Reddit',  href: 'https://reddit.com/',  icon: '🔴' },
+<script lang="ts">
+  const links = [
+    { href: '#about',  label: 'About'  },
+    { href: '#events', label: 'Events' },
+    { href: '#mascot', label: 'Mascot' },
+    { href: '#pvp',    label: 'PvP'    }
   ];
 </script>
 
-<footer class="relative overflow-hidden bg-midnight border-t border-white/[0.04]">
-  <StarField count={25} goldRatio={0.1} />
+<footer
+  class="relative py-16 px-6 border-t"
+  style="border-color: rgba(139,92,246,0.12);"
+>
+  <div class="max-w-5xl mx-auto">
 
-  <!-- Rings GIF strip at very top of footer -->
-  <div class="absolute top-0 inset-x-0 h-16 pointer-events-none z-0" aria-hidden="true">
-    <img
-      src="/assets/mascot/umbreon-rings.gif"
-      alt=""
-      class="w-full h-full object-cover opacity-[0.08]"
-      style="mix-blend-mode: screen;"
-    />
-    <div class="absolute inset-0" style="background: linear-gradient(to bottom, transparent 0%, #050810 100%);"></div>
-  </div>
+    <div class="grid md:grid-cols-3 gap-10 mb-12">
 
-  <!-- Main footer content -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-
-      <!-- Brand column -->
-      <div class="flex flex-col gap-5">
-        <div class="flex items-center gap-3">
-          <img
-            src="/assets/sprites/umbreon-sprite.png"
-            alt="Umbreon"
-            class="pixel w-10 h-10 object-contain"
-            style="image-rendering:pixelated; mix-blend-mode:screen; filter:drop-shadow(0 0 8px rgba(247,216,75,0.7));"
-          />
-          <div class="flex flex-col">
-            <span class="font-display text-[7px] text-yellow-400/50 tracking-[0.45em]">TEAM</span>
-            <span class="font-display text-[9px]"
-              style="color:#f7d84b; text-shadow:0 0 10px rgba(247,216,75,0.4);"
-            >MIDNIGHT WISH</span>
-          </div>
-        </div>
-
-        <p class="text-white/38 text-xs sm:text-sm leading-relaxed max-w-xs">
-          An elite Pokémon MMO guild. We hunt, battle, and explore — bonded by
-          darkness and the glow of Umbreon's rings.
+      <!-- Brand -->
+      <div>
+        <p class="font-pixel text-purple-500 tracking-widest glow-purple mb-3" style="font-size:0.6rem;">
+          ✦ TEAM MIDNIGHT WISH
         </p>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          PokeMMO Guild · Est. Gen II<br />
+          Drama-free. Always active.
+        </p>
+      </div>
 
-        <!-- Socials -->
-        <div class="flex items-center gap-4">
-          {#each socials as s}
+      <!-- Nav -->
+      <div>
+        <p class="text-xs font-semibold text-slate-700 uppercase tracking-widest mb-4">Navigation</p>
+        <div class="space-y-2">
+          {#each links as link}
             <a
-              href={s.href}
-              target="_blank"
-              rel="noreferrer noopener"
-              class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center
-                     hover:bg-yellow-400/10 hover:border-yellow-400/30 transition-all duration-200 text-sm"
-              aria-label={s.label}
-            >{s.icon}</a>
+              href={link.href}
+              class="block text-sm text-slate-600 hover:text-purple-400 transition-colors"
+            >{link.label}</a>
           {/each}
         </div>
       </div>
 
-      <!-- Nav links column -->
-      <div class="flex flex-col gap-3">
-        <p class="font-mono text-[9px] text-white/30 uppercase tracking-[0.4em] mb-1">Navigation</p>
-        {#each navLinks as link}
-          <a
-            href={link.href}
-            class="font-mono text-xs text-white/45 hover:text-yellow-400 transition-colors duration-200 w-fit uppercase tracking-wider"
-          >{link.label}</a>
-        {/each}
-      </div>
-
-      <!-- Eeveelutions mini group column -->
-      <div class="flex flex-col gap-4">
-        <p class="font-mono text-[9px] text-white/30 uppercase tracking-[0.4em] mb-1">The Team</p>
-        <div class="relative w-full max-w-[200px] rounded-2xl overflow-hidden border border-white/[0.06]"
-          style="background: rgba(10,14,26,0.8);"
-        >
-          <img
-            src="/assets/mascot/eeveelutions-group.png"
-            alt="All Eeveelutions — the spirit of Team Midnight Wish"
-            class="pixel w-full object-contain p-3"
-            style="image-rendering: pixelated;"
-          />
-        </div>
-        <p class="font-mono text-[9px] text-white/25 italic leading-relaxed max-w-[200px]">
-          Every evolution, every trainer — welcome.
+      <!-- Discord CTA -->
+      <div>
+        <p class="text-xs font-semibold text-slate-700 uppercase tracking-widest mb-4">Join Us</p>
+        <p class="text-sm text-slate-600 mb-5">
+          Find us on Discord. That's where everything happens.
         </p>
+        <a
+          href="https://discord.gg/tKBbRZqG"
+          target="_blank"
+          rel="noreferrer"
+          class="btn-gold text-sm"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+          </svg>
+          Join Discord ↗
+        </a>
       </div>
-    </div>
 
-    <!-- Divider -->
-    <div class="h-px w-full mb-8"
-      style="background: linear-gradient(90deg, transparent, rgba(247,216,75,0.2), transparent);"
-    ></div>
+    </div>
 
     <!-- Bottom bar -->
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="font-mono text-[9px] text-white/22 text-center sm:text-left">
-        © {year} Team Midnight Wish. Fan-made guild site. Pokémon © Nintendo / Game Freak.
+    <div
+      class="border-t pt-8 flex flex-col sm:flex-row items-center justify-between gap-3"
+      style="border-color: rgba(139,92,246,0.08);"
+    >
+      <p class="text-xs text-slate-800">
+        © 2026 Team Midnight Wish · Fan-made · Pokémon © Nintendo / Game Freak
       </p>
-      <p class="font-mono text-[9px] text-yellow-400/25 text-center">
-        Built with ♥ and moonlight
-      </p>
+      <p class="font-pixel text-purple-900" style="font-size:0.45rem;">Built with ♥ and moonlight</p>
     </div>
+
   </div>
 </footer>

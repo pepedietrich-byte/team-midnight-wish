@@ -1,41 +1,53 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
 
-  export let count      = 50;
-  export let goldRatio  = 0.08;
-  export let className  = '';
-
-  let stars = [];
+  let canvas: HTMLCanvasElement;
 
   onMount(() => {
-    stars = Array.from({ length: count }, (_, i) => ({
-      id:       i,
-      x:        Math.random() * 100,
-      y:        Math.random() * 100,
-      size:     Math.random() < 0.18 ? 2 : 1,
-      isGold:   Math.random() < goldRatio,
-      dur:      2.5 + Math.random() * 5,
-      delay:    Math.random() * 6,
-      baseOpacity: 0.2 + Math.random() * 0.8,
+    const ctx = canvas.getContext('2d')!;
+
+    const resize = () => {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+
+    const stars = Array.from({ length: 130 }, () => ({
+      x:     Math.random() * canvas.width,
+      y:     Math.random() * canvas.height,
+      r:     Math.random() * 1.2 + 0.3,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.006 + Math.random() * 0.008
     }));
+
+    let raf: number;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach((s) => {
+        s.phase += s.speed;
+        const op = 0.12 + Math.sin(s.phase) * 0.38;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${Math.max(0, op)})`;
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(draw);
+    };
+
+    draw();
+    window.addEventListener('resize', resize);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+    };
   });
 </script>
 
-<div
-  class="absolute inset-0 pointer-events-none overflow-hidden {className}"
+<canvas
+  bind:this={canvas}
+  class="fixed inset-0 pointer-events-none"
+  style="z-index:1;"
   aria-hidden="true"
->
-  {#each stars as s (s.id)}
-    <span
-      class="absolute rounded-full {s.isGold ? 'bg-yellow-300' : 'bg-white'}"
-      style="
-        width:  {s.size}px;
-        height: {s.size}px;
-        left:   {s.x}%;
-        top:    {s.y}%;
-        opacity:{s.baseOpacity};
-        animation: twinkle {s.dur}s ease-in-out infinite {s.delay}s;
-      "
-    ></span>
-  {/each}
-</div>
+></canvas>

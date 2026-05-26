@@ -1,161 +1,163 @@
-<script>
+<script lang="ts">
   import { scrollReveal } from '$lib/utils/animate.js';
-  import GlowCard         from './GlowCard.svelte';
-  import StarField        from './StarField.svelte';
-  import { leagues, steps } from '$lib/data/pvp.js';
+
+  const badges = [
+    { icon: '⭐', label: '5×31 IVs'        },
+    { icon: '🎒', label: 'Items Included'  },
+    { icon: '💪', label: 'EV Trained'      },
+    { icon: '⚡', label: 'Moves Ready'     }
+  ];
+
+  const steps = [
+    { n: '01', text: 'Open a ticket in #pvp-lending on Discord.'   },
+    { n: '02', text: 'Browse available Mons — IVs, moves, items.'  },
+    { n: '03', text: 'Borrow the team. Battle. Climb the ladder.'  },
+    { n: '04', text: 'Return after your session. Leave a rating.'  }
+  ];
 </script>
 
-<section id="pvp" class="relative overflow-hidden py-20 md:py-28" style="background:#07091a;">
-  <StarField count={40} goldRatio={0.07} />
+<section id="pvp" class="relative py-28 px-6 overflow-hidden">
 
-  <!-- ── Lugia in background (right, low opacity) ───────────────── -->
-  <div class="absolute right-0 top-0 bottom-0 w-[32rem] pointer-events-none select-none hidden lg:flex items-center" aria-hidden="true">
+  <!-- comet-bg.gif background layer -->
+  <div class="absolute inset-0 z-0 pointer-events-none select-none hidden md:block" aria-hidden="true">
     <img
-      src="/assets/sprites/lugia-sprite.png"
+      src="/assets/comet-bg.gif"
       alt=""
-      class="pixel w-full h-auto opacity-[0.08] animate-float-slow"
-      style="image-rendering:pixelated; animation-delay:1s; filter: drop-shadow(0 0 20px rgba(139,92,246,0.3));"
+      class="w-full h-full object-cover"
+      style="opacity: 0.18; mix-blend-mode: screen; filter: hue-rotate(-20deg) brightness(0.85);"
+      loading="lazy"
     />
   </div>
 
-  <!-- Blue neon accent top-left -->
-  <div class="absolute top-0 left-0 w-2/3 h-2/3 pointer-events-none opacity-20"
-    style="background: radial-gradient(ellipse 60% 60% at -5% 0%, rgba(20,60,180,0.3) 0%, transparent 60%);"
+  <!-- Ambient glow -->
+  <div
+    class="absolute inset-0 z-0 pointer-events-none"
+    aria-hidden="true"
+    style="background: radial-gradient(ellipse 65% 50% at 50% 50%, rgba(124,58,237,0.12) 0%, transparent 70%);"
   ></div>
 
-  <div class="section-wrap relative z-10">
+  <div class="relative z-10 max-w-5xl mx-auto">
 
-    <!-- Heading + Shiny Umbreon hero row -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+    <!-- Section header -->
+    <div use:scrollReveal class="text-center mb-14">
+      <p class="section-label">Service</p>
+      <h2 class="text-section font-display font-black text-white">
+        PvP Mons<br />
+        <span class="gradient-text">Lending</span>
+      </h2>
+    </div>
 
-      <!-- Text -->
-      <div class="flex flex-col gap-7" use:scrollReveal>
-        <div>
-          <p class="section-label mb-3">Service</p>
-          <h2 class="font-display text-xs sm:text-sm md:text-base leading-loose">
-            <span class="text-white">PvP</span><br/>
-            <span style="color:#3b9eff; text-shadow: 0 0 20px rgba(59,158,255,0.45);">Lending</span><br/>
-            <span class="text-white">Program</span>
-          </h2>
-        </div>
-        <p class="text-white/50 text-sm sm:text-base leading-relaxed max-w-md font-light">
-          Don't have the PvP team you need? Borrow one. Team Midnight Wish
-          maintains a rotating roster of meta-ready squads available to members
-          for competitive sessions — no cost, no stress.
-        </p>
-        <div class="flex flex-col xs:flex-row gap-3">
-          <a href="https://discord.gg/" target="_blank" rel="noreferrer noopener" class="btn-blue">
-            Open a Ticket ↗
-          </a>
-          <a href="#about" class="btn-outline">Learn More ►</a>
-        </div>
-      </div>
-
-      <!-- PvP mascot image -->
+    <!-- Premium card -->
+    <div use:scrollReveal={{ delay: 80 }}>
       <div
-        class="relative flex justify-center lg:justify-end"
-        use:scrollReveal={{ delay: 150, direction: 'left' }}
+        class="relative rounded-3xl p-8 md:p-12 overflow-hidden animate-glow-pulse"
+        style="
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(139,92,246,0.35);
+          box-shadow:
+            0 0 0 1px rgba(139,92,246,0.08),
+            0 0 50px  rgba(124,58,237,0.18),
+            0 0 100px rgba(124,58,237,0.08),
+            inset 0 1px 0 rgba(255,255,255,0.04);
+          backdrop-filter: blur(12px);
+        "
       >
-        <div class="relative">
-          <img
-            src="/assets/sprites/lugia-sprite.png"
-            alt="Lugia sprite — PvP mascot"
-            class="relative z-10 w-48 sm:w-56 md:w-64 h-auto object-contain"
-            style="animation: float 6s ease-in-out infinite;"
-          />
+        <!-- Top-edge highlight -->
+        <div
+          class="absolute top-0 left-10 right-10 h-px pointer-events-none"
+          aria-hidden="true"
+          style="background: linear-gradient(90deg, transparent, rgba(139,92,246,0.5), transparent);"
+        ></div>
+
+        <!-- Mew — floating foreground, white bg dissolved by radial vignette -->
+        <div
+          class="absolute bottom-0 right-8 lg:right-16 pointer-events-none select-none hidden lg:block animate-float"
+          style="width: 140px; z-index: 30; bottom: -30px;"
+          aria-hidden="true"
+        >
+          <div style="position: relative;">
+            <img
+              src="/assets/mew-sprite.png"
+              alt=""
+              style="width: 140px; image-rendering: pixelated; opacity: 0.88; display: block;"
+              loading="lazy"
+            />
+            <!-- Radial vignette dissolves white bg -->
+            <div style="
+              position: absolute;
+              inset: -16px;
+              background: radial-gradient(
+                circle at 50% 52%,
+                transparent                  28%,
+                rgba(7,3,26,0.88)            58%,
+                rgba(7,3,26,0.99)            74%
+              );
+              pointer-events: none;
+            "></div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- League cards -->
-    <div class="mb-14">
-      <p class="section-label mb-6 text-center" use:scrollReveal>Available Leagues</p>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        {#each leagues as league, i}
-          <div use:scrollReveal={{ delay: i * 100 }}>
-            <GlowCard
-              color={league.available ? 'blue' : 'default'}
-              padding="p-6"
-              className="h-full {!league.available ? 'opacity-55' : ''}"
-            >
-              <div class="flex flex-col gap-4 h-full">
-                <div class="flex items-center justify-between">
-                  <span class="text-2xl">{league.icon}</span>
-                  {#if league.available}
-                    <span class="font-mono text-[9px] px-2 py-1 rounded-full bg-green-400/10 border border-green-400/20 text-green-400 uppercase tracking-wider">
-                      Available
-                    </span>
-                  {:else}
-                    <span class="font-mono text-[9px] px-2 py-1 rounded-full bg-white/5 border border-white/10 text-white/30 uppercase tracking-wider">
-                      Soon
-                    </span>
-                  {/if}
-                </div>
+        <!-- Card content -->
+        <div class="relative z-40 max-w-xl">
 
-                <div>
-                  <h3 class="font-display text-[10px] sm:text-xs text-white mb-1">{league.name}</h3>
-                  <p class="font-mono text-blue-400/70 text-[9px] uppercase tracking-wider">{league.cap}</p>
-                </div>
+          <span
+            class="inline-block font-semibold tracking-widest px-3 py-1 rounded-full mb-6"
+            style="font-size:0.6rem; background:rgba(251,191,36,0.12); color:#fbbf24; border:1px solid rgba(251,191,36,0.25);"
+          >PVP SERVICE</span>
 
-                <p class="text-white/45 text-xs leading-relaxed flex-1">{league.description}</p>
-
-                <p class="font-mono text-[9px] text-white/28 italic">{league.highlight}</p>
-              </div>
-            </GlowCard>
-          </div>
-        {/each}
-      </div>
-    </div>
-
-    <!-- How It Works steps -->
-    <div use:scrollReveal={{ delay: 100 }}>
-      <p class="section-label mb-6 text-center">How It Works</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {#each steps as step, i}
-          <div use:scrollReveal={{ delay: i * 90 }}>
-            <GlowCard color="default" padding="p-5" className="h-full relative">
-              <!-- Step number -->
-              <span
-                class="absolute -top-3 -left-1 font-display text-[10px] text-yellow-400/30"
-                style="filter: drop-shadow(0 0 8px rgba(247,216,75,0.3));"
-              >{step.number}</span>
-
-              <div class="flex flex-col gap-3 pt-2">
-                <h4 class="font-display text-[10px] text-white">{step.title}</h4>
-                <p class="text-white/42 text-xs leading-relaxed">{step.body}</p>
-              </div>
-
-              <!-- Connector arrow (all but last) -->
-              {#if i < steps.length - 1}
-                <div class="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-yellow-400/30 text-sm">›</div>
-              {/if}
-            </GlowCard>
-          </div>
-        {/each}
-      </div>
-    </div>
-
-    <!-- Discord CTA banner -->
-    <div class="mt-14" use:scrollReveal={{ delay: 150 }}>
-      <GlowCard color="blue" padding="p-8" className="text-center">
-        <div class="flex flex-col items-center gap-5">
-          <span class="text-4xl">🎮</span>
-          <div>
-            <h3 class="font-display text-xs sm:text-sm text-white mb-2">Ready to Battle?</h3>
-            <p class="text-white/45 text-sm max-w-md mx-auto">
-              Join our Discord server to access PvP lending, event sign-ups, and the full community.
-            </p>
-          </div>
-          <a
-            href="https://discord.gg/"
-            target="_blank"
-            rel="noreferrer noopener"
-            class="btn-blue"
+          <h3
+            class="font-display font-black text-white mb-4"
+            style="font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.1;"
           >
-            Join Discord ↗
-          </a>
+            Battle-ready Pokémon.<br />Borrow a team.
+          </h3>
+
+          <p class="text-slate-300 text-base leading-relaxed mb-8">
+            5×31 IVs, full movesets, items, EV spreads — all ready.
+            No cost. No stress. Just climb the ladder.
+          </p>
+
+          <!-- Feature badges -->
+          <div class="flex flex-wrap gap-2 mb-10">
+            {#each badges as b}
+              <span
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold"
+                style="background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.22); color:#fcd34d;"
+              >
+                {b.icon} {b.label}
+              </span>
+            {/each}
+          </div>
+
+          <a
+            href="https://discord.gg/tKBbRZqG"
+            target="_blank"
+            rel="noreferrer"
+            class="btn-gold text-base"
+          >⚔ Open a Ticket</a>
+
         </div>
-      </GlowCard>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <div use:scrollReveal={{ delay: 160 }} class="mt-16">
+      <h3 class="text-center text-sm font-semibold text-slate-600 uppercase tracking-widest mb-8">How It Works</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {#each steps as step, i}
+          <div class="card-glass p-5 relative" style="border-color: rgba(139,92,246,0.15);">
+            <p class="font-pixel mb-4 leading-none" style="font-size:0.5rem; color:rgba(124,58,237,0.5);">{step.n}</p>
+            <p class="text-sm text-slate-400 leading-relaxed">{step.text}</p>
+            {#if i < steps.length - 1}
+              <div
+                class="hidden lg:block absolute top-1/2 -right-2 w-4 h-px"
+                style="background: rgba(139,92,246,0.3);"
+                aria-hidden="true"
+              ></div>
+            {/if}
+          </div>
+        {/each}
+      </div>
     </div>
 
   </div>

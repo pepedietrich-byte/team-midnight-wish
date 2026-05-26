@@ -1,5 +1,0 @@
-# Drop these 3 files into this folder before running npm run dev:
-#
-#   mew-sprite.png   — pixel Mew (white bg dissolved via CSS radial vignette)
-#   comet-bg.gif     — blue comet (black bg vanishes with mix-blend-mode: screen)
-#   moon-petals.gif  — anime moon scene (used at 15% opacity in Hero)

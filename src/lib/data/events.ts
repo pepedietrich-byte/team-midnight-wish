@@ -22,8 +22,8 @@ export const upcomingEvents: GameEvent[] = [
 ];
 
 export const eventTypes: EventType[] = [
-  { icon: '✨', title: 'Shiny Hunts',     desc: 'Community chains, theme nights, leaderboards.',  tag: 'Weekly'   },
+  { icon: '✨', title: 'Shiny Hunts',     desc: 'Submit your shinies and win excellent prizes',  tag: 'Weekly'   },
   { icon: '⚔️', title: 'PvP Tournaments', desc: 'Brackets, ladder seasons, open matches.',        tag: 'Monthly'  },
   { icon: '🏰', title: 'Raid Nights',     desc: 'Weekly legendaries, strategy docs, loot share.', tag: 'Weekly'   },
-  { icon: '🎯', title: 'Catch Events',    desc: 'Rare spawns, IV prizes, exclusive drops.',        tag: 'Rotating' }
+  { icon: '🎯', title: 'Catch Events',    desc: 'Weeky Rare Catch Events with great prizes',        tag: 'Rotating' }
 ];

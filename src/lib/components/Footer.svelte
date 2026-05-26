@@ -66,10 +66,5 @@
       style="border-color: rgba(139,92,246,0.08);"
     >
       <p class="text-xs text-slate-800">
-        © 2026 Team Midnight Wish · Fan-made · Pokémon © Nintendo / Game Freak
-      </p>
-      <p class="font-pixel text-purple-900" style="font-size:0.45rem;">Built with ♥ and moonlight</p>
-    </div>
-
-  </div>
+          © 2026 Team Midnight Wish · WARGODLoki · Pokémon © Nintendo / Game Freak
 </footer>

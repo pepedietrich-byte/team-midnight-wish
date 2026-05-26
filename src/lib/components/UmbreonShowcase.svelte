@@ -34,7 +34,6 @@
   <div class="relative z-10 max-w-6xl mx-auto">
     <div class="grid md:grid-cols-2 gap-16 items-center">
 
-      <!-- SVG Umbreon -->
       <div use:scrollReveal class="flex justify-center order-2 md:order-1">
         <div
           class="relative w-72 h-72 flex items-center justify-center rounded-full animate-float"
@@ -47,32 +46,12 @@
               inset 0 0 40px rgba(7,3,26,0.8);
           "
         >
-          <svg viewBox="0 0 100 100" class="w-48 h-48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Body -->
-            <ellipse cx="50" cy="63" rx="27" ry="20" fill="#0e0720"/>
-            <circle  cx="50" cy="38" r="20"           fill="#0e0720"/>
-            <!-- Rings -->
-            <ellipse cx="50" cy="57" rx="14" ry="3.5" fill="none" stroke="#fbbf24" stroke-width="2.2" opacity="0.9"/>
-            <ellipse cx="50" cy="68" rx="10" ry="2"   fill="none" stroke="#fbbf24" stroke-width="1.6" opacity="0.7"/>
-            <!-- Ears -->
-            <polygon points="33,23 26,5 38,18" fill="#0e0720"/>
-            <polygon points="67,23 74,5 62,18" fill="#0e0720"/>
-            <circle cx="33" cy="17" r="2.8" fill="#fbbf24" opacity="0.9"/>
-            <circle cx="67" cy="17" r="2.8" fill="#fbbf24" opacity="0.9"/>
-            <!-- Eyes -->
-            <circle cx="42" cy="36" r="5"   fill="#cc1133"/>
-            <circle cx="58" cy="36" r="5"   fill="#cc1133"/>
-            <circle cx="42" cy="36" r="2.2" fill="#0e0720"/>
-            <circle cx="58" cy="36" r="2.2" fill="#0e0720"/>
-            <!-- Forehead dot -->
-            <circle cx="50" cy="26" r="4" fill="#fbbf24" opacity="0.85"/>
-            <!-- Legs -->
-            <rect x="33" y="79" width="10" height="14" rx="5" fill="#0e0720"/>
-            <rect x="57" y="79" width="10" height="14" rx="5" fill="#0e0720"/>
-            <!-- Tail -->
-            <path d="M74 65 Q96 52 90 70 Q84 84 74 75" fill="#0e0720" stroke="#fbbf24" stroke-width="1.4" opacity="0.7"/>
-          </svg>
-          <!-- Outer glow ring -->
+          <img
+            src="/assets/sprites/umbreon-shiny.png"
+            alt="Shiny Umbreon mascot"
+            class="w-48 h-48 object-contain"
+            loading="lazy"
+          />
           <div
             class="absolute inset-0 rounded-full pointer-events-none animate-glow-pulse"
             style="border: 1px solid rgba(139,92,246,0.25);"

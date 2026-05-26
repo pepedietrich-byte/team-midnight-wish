@@ -20,10 +20,13 @@
 
     <!-- Logo -->
     <a href="#home" class="flex items-center gap-2 group">
-      <span class="font-pixel text-purple-500 group-hover:text-purple-300 transition-colors"
-            style="font-size: 0.55rem; letter-spacing: 0.2em;">
-        ✦ TMW
-      </span>
+      <img
+        src="/assets/sprites/mew-sprite.png"
+        alt="Mew sprite logo"
+        class="h-8 w-8 rounded-full border border-purple-500/30 bg-slate-950"
+        loading="lazy"
+      />
+      <span class="sr-only">Team Midnight Wish</span>
     </a>
 
     <!-- Desktop links -->

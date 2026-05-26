@@ -48,7 +48,7 @@
     {#if visible}
 
       <div in:fadeInUp={{ delay: 0, duration: 700 }}>
-        <p class="section-label mb-8">✦ PokeMMO Guild ✦</p>
+        <p class="section-label mb-8">✦ Pokemmo Team ✦</p>
       </div>
 
       <div in:fadeInUp={{ delay: 120, duration: 800 }}>
@@ -87,8 +87,8 @@
         <div class="flex items-center justify-center gap-12 flex-wrap">
           {#each [
             { num: '50+',  label: 'Members' },
-            { num: '24/7', label: 'Active'  },
-            { num: 'Gen II', label: 'Founded' }
+            { num: 'Very', label: 'Active'  },
+            { num: '2026', label: 'Founded' }
           ] as stat}
             <div class="text-center">
               <p class="font-display font-black text-4xl text-white glow-purple">{stat.num}</p>

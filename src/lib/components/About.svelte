@@ -6,11 +6,6 @@
     'Events', 'PvP', 'Shiny Hunts'
   ];
 
-  const stats = [
-    { num: '50+',  label: 'Members' },
-    { num: '3yrs', label: 'Active'  },
-    { num: '200+', label: 'Shinies' }
-  ];
 </script>
 
 <section id="about" class="relative py-28 px-6">
@@ -38,17 +33,6 @@
       {/each}
     </div>
 
-    <div
-      use:staggerReveal={{ delay: 260, step: 80 }}
-      class="mt-12 grid grid-cols-3 gap-6 max-w-sm"
-    >
-      {#each stats as stat}
-        <div class="text-left">
-          <p class="font-display font-black text-3xl text-purple-400 glow-purple">{stat.num}</p>
-          <p class="text-xs text-slate-600 mt-1 uppercase tracking-widest">{stat.label}</p>
-        </div>
-      {/each}
-    </div>
 
   </div>
 </section>

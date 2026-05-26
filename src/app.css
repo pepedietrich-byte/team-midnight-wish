@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Variables ──────────────────────────────────────────── */
+@layer base {
+  :root {
+    --gold:       #f7d84b;
+    --gold-dim:   #c4a832;
+    --blue-neon:  #3b9eff;
+    --purple:     #8b5cf6;
+    --midnight:   #050810;
+    --midnight-2: #0a0e1a;
+    --midnight-3: #0f1426;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--midnight);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar */
+  * { scrollbar-width: thin; scrollbar-color: var(--gold-dim) var(--midnight-2); }
+  *::-webkit-scrollbar       { width: 5px; }
+  *::-webkit-scrollbar-track { background: var(--midnight-2); }
+  *::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 4px; }
+
+  /* Pixel rendering */
+  .pixel { image-rendering: pixelated; image-rendering: crisp-edges; }
+}
+
+/* ─── Component classes ──────────────────────────────────────── */
+@layer components {
+
+  /* Glass cards */
+  .glass {
+    @apply bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-2xl;
+  }
+  .glass-gold {
+    @apply bg-yellow-400/[0.04] backdrop-blur-md border border-yellow-400/20 rounded-2xl;
+  }
+  .glass-blue {
+    @apply bg-blue-400/[0.04] backdrop-blur-md border border-blue-400/20 rounded-2xl;
+  }
+  .glass-purple {
+    @apply bg-purple-400/[0.04] backdrop-blur-md border border-purple-400/20 rounded-2xl;
+  }
+
+  /* Text gradients */
+  .text-gold-gradient {
+    @apply bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200 bg-clip-text text-transparent;
+  }
+  .text-blue-gradient {
+    @apply bg-gradient-to-r from-blue-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent;
+  }
+  .text-purple-gradient {
+    @apply bg-gradient-to-r from-purple-300 via-purple-400 to-pink-300 bg-clip-text text-transparent;
+  }
+
+  /* Glow filters */
+  .glow-gold   { filter: drop-shadow(0 0 8px rgba(247,216,75,0.75)); }
+  .glow-blue   { filter: drop-shadow(0 0 8px rgba(59,158,255,0.75)); }
+  .glow-purple { filter: drop-shadow(0 0 8px rgba(139,92,246,0.75)); }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-xl font-display text-black text-[10px]
+           bg-gradient-to-r from-yellow-400 to-yellow-500
+           hover:from-yellow-300 hover:to-yellow-400
+           transition-all duration-300 active:scale-95
+           hover:shadow-[0_0_24px_rgba(247,216,75,0.55)];
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-xl font-display text-yellow-400 text-[10px]
+           border border-yellow-400/40
+           hover:bg-yellow-400/10 hover:border-yellow-400/80
+           transition-all duration-300 active:scale-95
+           hover:shadow-[0_0_20px_rgba(247,216,75,0.25)];
+  }
+  .btn-blue {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-xl font-display text-white text-[10px]
+           bg-gradient-to-r from-blue-500 to-blue-600
+           hover:from-blue-400 hover:to-blue-500
+           transition-all duration-300 active:scale-95
+           hover:shadow-[0_0_24px_rgba(59,158,255,0.55)];
+  }
+
+  /* Section scaffold */
+  .section-wrap {
+    @apply relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28;
+  }
+  .section-label {
+    @apply font-mono text-[10px] uppercase tracking-[0.4em] text-yellow-400/60;
+  }
+  .section-heading {
+    @apply font-display text-xs sm:text-sm md:text-base leading-loose;
+  }
+}
+
+/* ─── Global keyframes (used inline) ────────────────────────── */
+@keyframes twinkle {
+  0%,100% { opacity: 0.2; transform: scale(1); }
+  50%     { opacity: 1;   transform: scale(1.7); }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-18px); }
+}
+@keyframes float-slow {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50%     { transform: translateY(-12px) rotate(4deg); }
+}
+@keyframes ring-pulse {
+  0%,100% { opacity: 0.5; transform: scale(1); }
+  50%     { opacity: 1;   transform: scale(1.08); }
+}
